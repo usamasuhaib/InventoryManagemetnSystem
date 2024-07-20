@@ -1,0 +1,33 @@
+<div id="main-container" class="min-h-screen  bg-slate-50 flex  justify-center items-center">
+
+    <div id="form-container " class="w-[75%] sm:w-[60%] h-[350px] md:w-[50%] md:h-[380px] lg:w-[40%] lg:h-[400px]   border-solid border-2 border-gray-300 bg-slate-200 rounded-xl shadow-xl flex flex-col items-center py-4 px-6 ">
+        <div class="flex flex-col justify-center items-center">
+            <img src="{{ imagePath }}" alt="logo" class="w-14 h-14 md:w-20 md:h-20 rounded-full " >
+            <h2 class="my-1 md:my-2  text-lg lg:text-xl font-extrabold">Please Login</h2>
+        </div>
+        <form class="form-body" [formGroup]="loginForm">
+
+            <div id="input-fields" class="flex flex-col mb-2 md:mb-3 ">
+                <label for="email"> Email</label>
+                <input class="w-[250px] md:w-[300px] lg:w-[320px] h-9 rounded-md mt-1 px-2" type="text" id="email" formControlName="email">
+            </div>
+
+            <div id="input-fields" class="flex flex-col mb-2 md:mb-3  ">
+                <label for="password"> Password</label>
+                <div class="flex flex-col gap-0">
+                    <input class="w-[250px] md:w-[300px] lg:w-[320px]  h-9 rounded-md mt-1  px-2" type="password" id="password" formControlName="password">
+                </div>
+
+            </div>
+            <div class="flex flex-col sm:flex-row sm:justify-between md:mt-2">
+                <button (click)="onClickLogin()" class="bg-sky-600 px-4 py-2 mt-2 rounded-lg text-lg font-semibold hover:bg-sky-500 cursor-pointer"> Login</button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+
+
+</div>

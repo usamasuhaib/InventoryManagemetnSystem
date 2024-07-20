@@ -1,0 +1,86 @@
+<div class=" flex-col justify-center items-center">
+
+    <div id="heading" class=" hidden sm:flex justify-between items-center px-6 py-3 2xl:mt-10 ">
+        <div class="h-[35px] px-4 py-1 rounded-md  text-2xl text-black font-bold ">Add Inventory</div>
+        <div class="flex  gap-6">
+            <button class=" h-[35px] px-4 py-2 bg-[#4835FA] rounded-md text-white font-medium hover:bg-[#3460FA]">Back
+                to List</button>
+        
+        </div>
+    </div>
+    <div id="form-container "
+        class=" container mx-auto w-[98%]  lg:w-[85%] h-fit   border-solid border-2 border-gray-300 bg-slate-200 rounded-lg shadow-xl flex flex-col items-center py-4 px-16 mt-2 2xl:mt-6">
+
+        <form action="" class="w-full flex flex-col gap-7 2xl:gap-10 px-4 py-2 2xl:py-6"  [formGroup]="InventoryForm" (ngSubmit)="createInventoryItem()">
+
+            <div id="row1" class="flex flex-row gap-8 w-full justify-between">
+
+                <div  class="flex flex-col gap-2 w-[50%]">
+                    <label class="font-medium 2xl:text-lg" for="age">Inventory Name</label>
+                    <input class=" h-9 2xl:h-12 rounded-md py-2 px-2 2xl:text-xl" type="text" id="name" formControlName="name">
+                </div>
+                <div class="flex flex-col gap-2 w-[50%]">
+                    <label class="font-medium 2xl:text-lg" for="age">Price</label>
+                    <input class=" h-9 2xl:h-12 rounded-md py-2 px-2 2xl:text-xl" type="number" id="price" formControlName="price">
+                </div>
+            </div>
+
+            <div id="row2" class="flex flex-row gap-8 w-full justify-between">
+
+                <div class="flex flex-col gap-2 w-[50%]">
+                    <label class="font-medium 2xl:text-lg" for="age">Quantity</label>
+                    <input class=" h-9 2xl:h-12 rounded-md py-3 px-2 2xl:text-xl" type="number" id="dob" formControlName="quantity">
+                </div>
+                <div id="gender" class="flex flex-col gap-2 w-[50%]">
+                    <label class="font-medium 2xl:text-lg" for="gender">Category</label>
+
+                    <select name="" id="" class=" h-9 2xl:h-12 rounded-md py-1 px-2 2xl:text-xl" formControlName="category">
+                        <option value="">Select Select Category</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+            </div>
+ 
+
+
+            <div id="row3" class="flex flex-row gap-8 w-full justify-between">
+                <div class="flex flex-col gap-2 w-[50%]">
+                    <label class="font-medium 2xl:text-lg" for="fname">Description</label>
+            
+                    <textarea name="" id="" class=" h-9 2xl:h-12 rounded-md py-2 px-2 2xl:text-xl"
+                        formControlName="description"></textarea>
+                </div>
+            
+                <div class="flex flex-col gap-2 w-[50%]">
+                    <label class="font-medium 2xl:text-lg" for="warehouse">Select Warehouse:</label>
+                    <select id="warehouse" (change)="onWarehouseChange($event)">
+                        <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+                          {{ warehouse.name }}
+                        </option>
+                      </select>
+                </div>
+            </div>
+
+
+
+
+
+            <div id="row4" class=" gap-2">
+                <button class=" h-[35px] px-4 py-2 bg-[#4835FA] rounded-md text-white font-medium hover:bg-[#3460FA]">Add Item</button>
+            </div>
+
+
+
+          
+        </form>
+
+    </div>
+
+</div>
+
+
+
+  

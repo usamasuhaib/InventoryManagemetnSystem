@@ -1,0 +1,111 @@
+<!-- admin sidebar  -->
+
+<nav class="bg-[#303461] min-h-screen  shadow-lg " >
+
+
+
+    <div id="school-logo" class="flex flex-col justify-center items-center xl:gap-2">
+
+        <img src="{{ imagePath }}" alt="" class="w-16 h-16  2xl:w-24 2xl:h-24 rounded-full bg-white my-4">
+        <p class="hidden lg:block  lg:text-[15px] 2xl:text-2xl font-semibold text-white">Usama Suhaib ERP</p>
+    </div>
+
+    <div class="h-[1.5px] bg-gray-500 mt-3 xl:mt-4 2xl:mt-6"></div>
+
+    <div>
+        <ul class="flex flex-col list-none mt-4 gap-2 md:gap-2 lg:gap-4 xl:gap-5 2xl:gap-12">
+
+            <li class="flex flex-row  items-center gap-5 xl:gap-6 hover:cursor-pointer hover:bg-[#7D93B6] py-2 px-[12px]"
+                (click)="dashboard()" routerLinkActive="active">
+                <fa-icon [icon]="faDashboard" class="text-lg  2xl:text-3xl text-gray-300 ml-4 xl:ml-5"></fa-icon>
+                <p class="hidden lg:block  2xl:text-xl text-white font-medium">Dashboard</p>
+            </li>
+
+            <ng-container *ngIf="isAdmin()">
+
+
+
+                <li class="flex flex-row justify-between  hover:cursor-pointer hover:bg-[#7D93B6] py-2 px-[12px]">
+                    <div class="flex flex-row items-center gap-5 xl:gap-6 ">
+                        <fa-icon [icon]="faUser" class="text-xl  2xl:text-3xl text-gray-300 ml-4 xl:ml-5"></fa-icon>
+                        <p class="hidden lg:block 2xl:text-xl text-white font-medium">Manage Users</p>
+                    </div>
+                </li>
+
+                <!-- //manage inventory -->
+                <li class="flex flex-row justify-between  hover:cursor-pointer hover:bg-[#7D93B6] py-2 px-[12px]"
+                    (click)="toggleMenu('inventory')">
+                    <div class="flex flex-row items-center gap-5 xl:gap-6 ">
+                        <fa-icon [icon]="faInventory"
+                            class="text-xl  2xl:text-3xl text-gray-300 ml-4 xl:ml-5"></fa-icon>
+                        <p class="hidden lg:block 2xl:text-xl text-white font-medium">Inventory</p>
+                    </div>
+
+                    <fa-icon [icon]="isInventoryMenuOpen ? faChevronDown : faChevronRight"
+                        class="  text-gray-300 ml-4 xl:ml-5"></fa-icon>
+                </li>
+
+                <span *ngIf="isInventoryMenuOpen"
+                    class="flex flex-col justify-end items-center  mx-4 bg-black rounded-md overflow-hidden">
+
+                    <ul class="flex flex-col list-none justify-end  gap-1  lg:gap-2  2xl:gap-4 w-full">
+                        <li class="flex flex-row  items-center gap-2 xl:gap-4 hover:cursor-pointer hover:bg-[#7D93B6] py-1 px-[8px]"
+                            (click)="InventoryList()" routerLinkActive="active">
+                            <fa-icon [icon]="faInventory" class="text-base text-gray-300 ml-4 xl:ml-5"></fa-icon>
+                            <p class="hidden lg:block text-sm text-white font-medium">Inventory List</p>
+                        </li>
+
+                        <li class="flex flex-row  items-center gap-2 xl:gap-4 hover:cursor-pointer hover:bg-[#7D93B6] py-1 px-[8px] "
+                        (click)="CreateInventory()" routerLinkActive="active">
+                            <fa-icon [icon]="faAdd" class="text-base text-gray-300 ml-4 xl:ml-5"></fa-icon>
+                            <p class="hidden lg:block text-sm text-white font-medium">Add Inventory</p>
+                        </li>
+
+
+                    </ul>
+                </span>
+
+                <li class="flex flex-row justify-between  hover:cursor-pointer hover:bg-[#7D93B6] py-2 px-[12px]">
+                    <div class="flex flex-row items-center gap-5 xl:gap-6 ">
+                        <fa-icon [icon]="faWarehouse"
+                            class="text-xl  2xl:text-3xl text-gray-300 ml-4 xl:ml-5"></fa-icon>
+                        <p class="hidden lg:block 2xl:text-xl text-white font-medium">Manage WareHouse</p>
+                    </div>
+                </li>
+
+            </ng-container>
+
+
+            <!-- Manager-specific sidebar items -->
+            <ng-container *ngIf="isManager()">
+                <!-- //manage inventory -->
+                <li class="flex flex-row justify-between  hover:cursor-pointer hover:bg-[#7D93B6] py-2 px-[12px]"
+                    (click)="toggleMenu('inventory')">
+                    <div class="flex flex-row items-center gap-5 xl:gap-6 ">
+                        <fa-icon [icon]="faInventory"
+                            class="text-xl  2xl:text-3xl text-gray-300 ml-4 xl:ml-5"></fa-icon>
+                        <p class="hidden lg:block 2xl:text-xl text-white font-medium">Inventory</p>
+                    </div>
+
+                    <fa-icon [icon]="isInventoryMenuOpen ? faChevronDown : faChevronRight"
+                        class="  text-gray-300 ml-4 xl:ml-5"></fa-icon>
+                </li>
+
+                <span *ngIf="isInventoryMenuOpen"
+                    class="flex flex-col justify-end items-center  mx-4 bg-black rounded-md overflow-hidden">
+
+                    <ul class="flex flex-col list-none justify-end  gap-1  lg:gap-2  2xl:gap-4 w-full">
+                        <li class="flex flex-row  items-center gap-2 xl:gap-4 hover:cursor-pointer hover:bg-[#7D93B6] py-1 px-[8px]"
+                            (click)="InventoryList()" routerLinkActive="active">
+                            <fa-icon [icon]="faInventory" class="text-base text-gray-300 ml-4 xl:ml-5"></fa-icon>
+                            <p class="hidden lg:block text-sm text-white font-medium">Inventory List</p>
+                        </li>
+                    </ul>
+                </span>
+            </ng-container>
+
+
+        </ul>
+    </div>
+
+</nav>

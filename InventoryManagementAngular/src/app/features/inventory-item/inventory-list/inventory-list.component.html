@@ -1,0 +1,67 @@
+<div class=" flex-col justify-center items-center">
+
+    <div id="heading" class="flex justify-between items-center px-6 py-3">
+        <div class="h-[35px] px-4 py-1 rounded-md  text-2xl text-black font-bold shadow-sm">Students list</div>
+        <div class="flex  gap-6">
+            <button class=" h-[35px] px-4 py-2 bg-[#4835FA] rounded-md text-white font-medium hover:bg-[#3460FA]"
+                (click)="addInventory()">Add Inventory</button>
+            <!-- <button
+                class=" h-[35px] px-4 py-2 bg-[#4835FA] rounded-md text-white font-medium hover:bg-[#3460FA]">Download
+                CSV</button> -->
+        </div>
+    </div>
+
+    <div id="tableContainer"
+        class="container mx-auto w-[98%]  border border-gray-300 h-fit bg-white overflow-hidden rounded-md">
+        <table class="w-full  ">
+
+            <thead class="bg-green-50 border-b-2 border-gray-200 ">
+                <tr class="">
+
+                    <th class="p-3 text-[16px] font-semibold tracking-wide text-left">Item Name</th>
+                    <th class="p-3 text-[16px] font-semibold tracking-wide text-left">Price</th>
+
+                    <th class="p-3 text-[16px] font-semibold tracking-wide text-left">Quantity</th>
+
+                    <th class="p-3 text-[16px] font-semibold tracking-wide text-left">Category</th>
+                    <th class="p-3 text-[16px] font-semibold tracking-wide text-left">Action</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @for(item of inventoryItems; track item.id){
+
+                <tr class="border-b-2">
+                    <td class="p-3 text-[14px] font-semibold">{{item.name}}</td>
+
+                    <td class="p-3 text-[14px]">{{item.price}}</td>
+                    <td class="p-3 text-[14px]">{{item.quantity}}</td>
+
+                    <td class="p-3 text-[14px]">{{item.category}}</td>
+                    <td class="p-3  flex flex-row gap-5">
+                        <button class="" title="Edit Record" (click)="onEdit(item.id)">
+                            <fa-icon [icon]="faEdit" class="text-xl text-blue-700"></fa-icon>
+                        </button>
+            
+
+                        <button class="" title="Delete Record"  (click)="deleteInventoryItem(item.id)" >
+                            <fa-icon [icon]="faDelete" class="text-xl text-red-600"></fa-icon>
+                        </button>
+
+                        <!-- <button class="" title="View Details" (click)="onStudentDetails(student.userId)">
+                            <fa-icon [icon]="faView" class="text-xl text-blue-500"></fa-icon>
+                        </button> -->
+
+                        <button class="" title="View Details" >
+                            <fa-icon [icon]="faView" class="text-xl text-blue-500"></fa-icon>
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
