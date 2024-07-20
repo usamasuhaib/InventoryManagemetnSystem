@@ -123,6 +123,9 @@ namespace InventoryManagementAPI.Migrations
                     b.Property<string>("TenantId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("WarehouseId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("InventoryItems");
@@ -136,7 +139,8 @@ namespace InventoryManagementAPI.Migrations
                             Name = "Item 1",
                             Price = 10m,
                             Quantity = 100,
-                            TenantId = "tenant1"
+                            TenantId = "tenant1",
+                            WarehouseId = 0
                         },
                         new
                         {
@@ -146,7 +150,8 @@ namespace InventoryManagementAPI.Migrations
                             Name = "Item 2",
                             Price = 20m,
                             Quantity = 50,
-                            TenantId = "tenant1"
+                            TenantId = "tenant1",
+                            WarehouseId = 0
                         },
                         new
                         {
@@ -156,7 +161,8 @@ namespace InventoryManagementAPI.Migrations
                             Name = "Item 3",
                             Price = 15m,
                             Quantity = 75,
-                            TenantId = "tenant1"
+                            TenantId = "tenant1",
+                            WarehouseId = 0
                         },
                         new
                         {
@@ -166,7 +172,8 @@ namespace InventoryManagementAPI.Migrations
                             Name = "Item 4",
                             Price = 50m,
                             Quantity = 200,
-                            TenantId = "tenant2"
+                            TenantId = "tenant2",
+                            WarehouseId = 0
                         },
                         new
                         {
@@ -176,7 +183,8 @@ namespace InventoryManagementAPI.Migrations
                             Name = "Item 5",
                             Price = 68m,
                             Quantity = 80,
-                            TenantId = "tenant1"
+                            TenantId = "tenant1",
+                            WarehouseId = 0
                         },
                         new
                         {
@@ -186,7 +194,8 @@ namespace InventoryManagementAPI.Migrations
                             Name = "Item 6",
                             Price = 100m,
                             Quantity = 95,
-                            TenantId = "tenant2"
+                            TenantId = "tenant2",
+                            WarehouseId = 0
                         },
                         new
                         {
@@ -196,7 +205,8 @@ namespace InventoryManagementAPI.Migrations
                             Name = "Item8",
                             Price = 100m,
                             Quantity = 10,
-                            TenantId = "tenant1"
+                            TenantId = "tenant1",
+                            WarehouseId = 0
                         },
                         new
                         {
@@ -206,7 +216,8 @@ namespace InventoryManagementAPI.Migrations
                             Name = "Item9",
                             Price = 200m,
                             Quantity = 20,
-                            TenantId = "tenant2"
+                            TenantId = "tenant2",
+                            WarehouseId = 0
                         },
                         new
                         {
@@ -216,7 +227,8 @@ namespace InventoryManagementAPI.Migrations
                             Name = "Item10",
                             Price = 300m,
                             Quantity = 30,
-                            TenantId = "tenant1"
+                            TenantId = "tenant1",
+                            WarehouseId = 0
                         },
                         new
                         {
@@ -226,7 +238,8 @@ namespace InventoryManagementAPI.Migrations
                             Name = "Item11",
                             Price = 400m,
                             Quantity = 40,
-                            TenantId = "tenant2"
+                            TenantId = "tenant2",
+                            WarehouseId = 0
                         });
                 });
 

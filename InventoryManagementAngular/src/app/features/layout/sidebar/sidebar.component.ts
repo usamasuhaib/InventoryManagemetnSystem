@@ -47,14 +47,6 @@ export class SidebarComponent {
    }
 
 
-
-
-   
-
-
- 
-
-
    isAdmin(): boolean {
     return this.authService.isAdmin();
   }

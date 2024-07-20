@@ -72,8 +72,8 @@ namespace InventoryManagementAPI.Data
             );
 
             builder.Entity<WarehouseInventoryItem>()
-        .HasKey(wi => new { wi.WarehouseId, wi.InventoryItemId });
-            
+                .HasKey(wi => new { wi.WarehouseId, wi.InventoryItemId });
+
             builder.Entity<WarehouseInventoryItem>()
                 .HasOne(wi => wi.Warehouse)
                 .WithMany(w => w.WarehouseInventoryItems)
@@ -97,6 +97,13 @@ namespace InventoryManagementAPI.Data
                 .HasPrecision(18, 2);
 
 
+            builder.Entity<InventoryItem>(entity =>
+            {
+                entity.Property(e => e.TenantId)
+                      .IsRequired();
+            });
+
+
         }
 
         private static void SeedRoles(ModelBuilder builder)
@@ -107,30 +114,14 @@ namespace InventoryManagementAPI.Data
                 );
         }
 
-        private string GetTenantId()
-        {
-            return _httpContextAccessor.HttpContext?.Items["TenantId"] as string ?? "default_tenant";
-        }
-
         public override int SaveChanges()
         {
-            ApplyTenantId();
             return base.SaveChanges();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            ApplyTenantId();
             return base.SaveChangesAsync(cancellationToken);
-        }
-
-        private void ApplyTenantId()
-        {
-            var tenantId = GetTenantId();
-            foreach (var entry in ChangeTracker.Entries<EntityBase>().Where(e => e.State == EntityState.Added))
-            {
-                entry.Entity.TenantId = tenantId;
-            }
         }
     }
 }

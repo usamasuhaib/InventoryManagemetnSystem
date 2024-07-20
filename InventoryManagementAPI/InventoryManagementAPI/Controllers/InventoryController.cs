@@ -45,11 +45,11 @@ namespace InventoryManagementAPI.Controllers
                 }
 
                 var items = await _dbContext.InventoryItems
-                    .FromSqlRaw(@"SELECT Id, Name, CAST(Price AS decimal(18,2)) AS Price, Quantity, Description, Category, TenantId 
-                  FROM InventoryItems 
-                  WHERE TenantId = {0}", tenantId)
+                    .FromSqlRaw(@"SELECT Id, Name, CAST(Price AS decimal(18,2)) AS Price, Quantity, Description, Category, TenantId, WarehouseId 
+                          FROM InventoryItems 
+                          WHERE TenantId = {0}", tenantId)
                     .ToListAsync();
-                
+
                 return Ok(items);
             }
             catch (Exception ex)
@@ -100,52 +100,37 @@ namespace InventoryManagementAPI.Controllers
                     Price = inventoryItemDto.Price,
                     Description = inventoryItemDto.Description,
                     Quantity = inventoryItemDto.Quantity,
-                    TenantId = tenantId
+                    TenantId = tenantId,
+                    WarehouseId = inventoryItemDto.WarehouseId
                 };
 
-                try
+
+                // Validate the warehouse
+                var warehouse = await _dbContext.Warehouses.FirstOrDefaultAsync(w => w.Id == inventoryItemDto.WarehouseId && w.TenantId == tenantId);
+                if (warehouse == null)
                 {
-                    // Add new item to the context
-                    await _dbContext.InventoryItems.AddAsync(newItem);
-                    await _dbContext.SaveChangesAsync();
-
-                    var warehouse = await _dbContext.Warehouses
-                        .FirstOrDefaultAsync(w => w.Id == inventoryItemDto.wareHouseId && w.TenantId == tenantId);
-
-                    if (warehouse == null)
-                    {
-                        return BadRequest($"Invalid Warehouse Id: {inventoryItemDto.wareHouseId}");
-                    }
-
-                    var warehouseInventoryItem = new WarehouseInventoryItem
-                    {
-                        WarehouseId = inventoryItemDto.wareHouseId,
-                        InventoryItemId = newItem.Id
-                    };
-
-                    _dbContext.Set<WarehouseInventoryItem>().Add(warehouseInventoryItem);
-                    await _dbContext.SaveChangesAsync();
-
-                    return Ok(new
-                    {
-                        Result = "New Item Added Successfully"
-                    });
+                    return BadRequest($"Invalid Warehouse Id: {inventoryItemDto.WarehouseId}");
                 }
-                catch (Exception ex)
+
+                // Add new item to the context
+                await _dbContext.InventoryItems.AddAsync(newItem);
+                await _dbContext.SaveChangesAsync();
+
+                return Ok(new
                 {
-                    // Log exception
-                    return StatusCode(500, $"Internal server error: {ex.Message}");
-                }
+                    Result = "New Item Added Successfully"
+                });
+
             }
 
             return BadRequest(new { Result = "Failed to add new item" });
         }
 
 
-        private string GetCurrentTenantId()
-        {
-            return _httpContextAccessor.HttpContext?.Items["TenantId"] as string ?? "default_tenant";
-        }
+        //private string GetCurrentTenantId()
+        //{
+        //    return _httpContextAccessor.HttpContext?.Items["TenantId"] as string ?? "default_tenant";
+        //}
 
 
         [Authorize(Policy = "AdminOnly")]

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Route, Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEdit, faEye, faRemove, faTrash, faWarning } from '@fortawesome/free-solid-svg-icons';
 import { HttpClient } from '@angular/common/http';
@@ -33,7 +33,7 @@ export class InventoryListComponent {
     private title:Title,
     private router:Router,
     private inventoryService:InventoryService,
-    private authService:AuthService
+    private authService:AuthService,
   
   ) {
 
@@ -84,9 +84,10 @@ deleteInventoryItem(id: any): void {
 }
 
 
-  addInventory(){
-    return this.router.navigate(['admin/add-std']);
-  }
+CreateInventory(){
+  return this.router.navigate(['/inventory/create'])
+
+}
 
 
   onStudentDetails(id:any){
